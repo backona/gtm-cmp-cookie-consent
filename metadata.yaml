@@ -1,0 +1,9 @@
+# Community Template Gallery publishing.
+# https://developers.google.com/tag-platform/tag-manager/templates/gallery
+
+homepage: "https://backona.com"
+documentation: "https://github.com/backona/gtm-cmp-cookie-consent/blob/main/README.md"
+
+# The release workflow prepends sha and changeNotes when template.tpl changes on main.
+# Gallery submission needs that first version entry. Its sha is the main commit that contains template.tpl.
+versions:
