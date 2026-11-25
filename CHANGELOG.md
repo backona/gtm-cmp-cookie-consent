@@ -8,9 +8,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 Do not edit the NEW_VERSION and VERSION_DATE fields, they will be updated automatically by the Github Action script.
 
 ## [<NEW_VERSION>] - <VERSION_DATE>
-### Added
 ### Changed
-### Fixed
+- Cookie Consent template grants `security_storage` by default when it is included, the same way as `functionality_storage`
+- Consent parameter fields are ordered security, functionality, personalization, then analytics and ad signals. The defaults group is titled Default consent states
 
 ## [0.1.0] - 2026-11-24 (by @slazak)
 ### Added

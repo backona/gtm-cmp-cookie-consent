@@ -40,7 +40,7 @@ When **Set consent defaults** is enabled:
 - **Global Privacy Control (GPC)** keeps defaults denied when the browser sends a GPC signal and no saved consent cookie exists.
 - **URL passthrough** passes ad click parameters in the URL on same-domain navigation when cookies are denied.
 - **Ads data redaction** redacts ad-related identifiers in Google network requests when `ad_storage` is denied.
-- **Extended consent parameters** can include `functionality_storage`, `personalization_storage`, and `security_storage`.
+- **Extended consent parameters** can include `functionality_storage`, `personalization_storage`, and `security_storage`. `functionality_storage` and `security_storage` are granted when included, unless that checkbox is cleared.
 
 ## Support
 

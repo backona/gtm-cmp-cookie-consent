@@ -113,6 +113,15 @@ ___TEMPLATE_PARAMETERS___
     "subParams": [
       {
         "type": "CHECKBOX",
+        "name": "includeSecurityStorage",
+        "displayName": "security_storage",
+        "checkboxText": "Include security_storage",
+        "simpleValueType": true,
+        "defaultValue": false,
+        "help": "When enabled, security_storage is included in consent defaults (denied unless granted below)."
+      },
+      {
+        "type": "CHECKBOX",
         "name": "includeFunctionalityStorage",
         "displayName": "functionality_storage",
         "checkboxText": "Include functionality_storage",
@@ -128,22 +137,13 @@ ___TEMPLATE_PARAMETERS___
         "simpleValueType": true,
         "defaultValue": false,
         "help": "When enabled, personalization_storage is included in consent defaults (denied unless granted below)."
-      },
-      {
-        "type": "CHECKBOX",
-        "name": "includeSecurityStorage",
-        "displayName": "security_storage",
-        "checkboxText": "Include security_storage",
-        "simpleValueType": true,
-        "defaultValue": false,
-        "help": "When enabled, security_storage is included in consent defaults (denied unless granted below)."
       }
     ]
   },
   {
     "type": "GROUP",
     "name": "consentDefaultStates",
-    "displayName": "Default consent states (first visit)",
+    "displayName": "Default consent states",
     "groupStyle": "ZIPPY_CLOSED",
     "enableConditions": [
       [
@@ -157,35 +157,20 @@ ___TEMPLATE_PARAMETERS___
     "subParams": [
       {
         "type": "CHECKBOX",
-        "name": "defaultAnalyticsStorage",
-        "displayName": "analytics_storage",
-        "checkboxText": "Grant analytics_storage by default",
+        "name": "defaultSecurityStorage",
+        "displayName": "security_storage default",
+        "checkboxText": "Grant security_storage by default",
         "simpleValueType": true,
-        "defaultValue": false
-      },
-      {
-        "type": "CHECKBOX",
-        "name": "defaultAdStorage",
-        "displayName": "ad_storage",
-        "checkboxText": "Grant ad_storage by default",
-        "simpleValueType": true,
-        "defaultValue": false
-      },
-      {
-        "type": "CHECKBOX",
-        "name": "defaultAdPersonalization",
-        "displayName": "ad_personalization",
-        "checkboxText": "Grant ad_personalization by default",
-        "simpleValueType": true,
-        "defaultValue": false
-      },
-      {
-        "type": "CHECKBOX",
-        "name": "defaultAdUserData",
-        "displayName": "ad_user_data",
-        "checkboxText": "Grant ad_user_data by default",
-        "simpleValueType": true,
-        "defaultValue": false
+        "defaultValue": true,
+        "enableConditions": [
+          [
+            {
+              "type": "EQUALS",
+              "paramName": "includeSecurityStorage",
+              "paramValue": true
+            }
+          ]
+        ]
       },
       {
         "type": "CHECKBOX",
@@ -223,20 +208,35 @@ ___TEMPLATE_PARAMETERS___
       },
       {
         "type": "CHECKBOX",
-        "name": "defaultSecurityStorage",
-        "displayName": "security_storage default",
-        "checkboxText": "Grant security_storage by default",
+        "name": "defaultAnalyticsStorage",
+        "displayName": "analytics_storage",
+        "checkboxText": "Grant analytics_storage by default",
         "simpleValueType": true,
-        "defaultValue": false,
-        "enableConditions": [
-          [
-            {
-              "type": "EQUALS",
-              "paramName": "includeSecurityStorage",
-              "paramValue": true
-            }
-          ]
-        ]
+        "defaultValue": false
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "defaultAdStorage",
+        "displayName": "ad_storage",
+        "checkboxText": "Grant ad_storage by default",
+        "simpleValueType": true,
+        "defaultValue": false
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "defaultAdPersonalization",
+        "displayName": "ad_personalization",
+        "checkboxText": "Grant ad_personalization by default",
+        "simpleValueType": true,
+        "defaultValue": false
+      },
+      {
+        "type": "CHECKBOX",
+        "name": "defaultAdUserData",
+        "displayName": "ad_user_data",
+        "checkboxText": "Grant ad_user_data by default",
+        "simpleValueType": true,
+        "defaultValue": false
       }
     ]
   }
@@ -869,7 +869,7 @@ scenarios:
       includeFunctionalityStorage: true,
       includeSecurityStorage: true,
       defaultFunctionalityStorage: true,
-      defaultSecurityStorage: false
+      defaultSecurityStorage: true
     });
 
     assertApi('setDefaultConsentState').wasCalledWith({
@@ -878,7 +878,7 @@ scenarios:
       ad_personalization: 'denied',
       ad_user_data: 'denied',
       functionality_storage: 'granted',
-      security_storage: 'denied'
+      security_storage: 'granted'
     });
     assertApi('gtmOnSuccess').wasCalled();
 - name: granular basic defaults granted
@@ -1094,7 +1094,7 @@ setup: |-
     defaultAdUserData: false,
     defaultFunctionalityStorage: true,
     defaultPersonalizationStorage: false,
-    defaultSecurityStorage: false,
+    defaultSecurityStorage: true,
     enableGpcSupport: false,
     urlPassthrough: false,
     adsDataRedaction: false
