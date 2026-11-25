@@ -5,6 +5,11 @@ homepage: "https://backona.com"
 documentation: "https://github.com/backona/gtm-cmp-cookie-consent/blob/main/README.md"
 
 versions:
+  - sha: 5e50595b05e48cc6574f2b512e020fcc10506820
+    changeNotes: |
+      ### Changed
+      - Cookie Consent template grants `security_storage` by default when it is included, the same way as `functionality_storage`
+      - Consent parameter fields are ordered security, functionality, personalization, then analytics and ad signals. The defaults group is titled Default consent states
   - sha: 36b2072fb69ba60ea80d82b625e6739da20c94b9
     changeNotes: |
       ### Added
